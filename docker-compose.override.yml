@@ -1,0 +1,27 @@
+services:
+  controller:
+    user: "1500:1500"
+    init: true
+    volumes:
+      - /opt/unifi/dir:/unifi
+      - /opt/unifi/data:/unifi/data
+      - /opt/unifi/log:/unifi/log
+      - /opt/unifi/cert:/unifi/cert
+      - /opt/unifi/init:/unifi/init.d
+      - /opt/unifi/backup:/unifi/data/backup
+      - /opt/unifi/run:/var/run/unifi
+    environment:
+      - TZ=Asia/Tokyo
+      - LOTSOFDEVICES=true
+    ports:
+      - 5514:5514/udp	#optional
+
+  mongo:
+    user: "1500:1500"
+    volumes:
+      - /opt/unifi/db:/data/db
+      - /opt/unifi/dbcfg:/data/configdb
+
+  logs:
+    volumes:
+      - /opt/unifi/log:/unifi/log
